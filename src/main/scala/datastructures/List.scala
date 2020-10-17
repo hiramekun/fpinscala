@@ -45,4 +45,28 @@ object List {
     case Cons(x, xs: Cons[A]) => Cons(x, init(xs))
     case _ => Nil
   }
+
+  def foldRight[A, B](as: List[A], z: B)(f: (A, B) => B): B =
+    as match {
+      case Nil => z
+      case Cons(x, xs) => f(x, foldRight(xs, z)(f))
+    }
+
+  @scala.annotation.tailrec
+  def foldLeft[A, B](as: List[A], z: B)(f: (B, A) => B): B =
+    as match {
+      case Nil => z
+      case Cons(x, xs) => foldLeft(xs, f(z, x))(f)
+    }
+
+  def length[A](as: List[A]): Int = foldRight(as, 0) { (_, acc) => acc + 1 }
+
+  def sumL(as: List[Int]): Int = foldLeft(as, 0)(_ + _)
+
+  def productL(as: List[Double]): Double = foldLeft(as, 1.0)(_ * _)
+
+  def lengthL[A](as: List[A]): Int = foldLeft(as, 0) { (x, _) => x + 1 }
+
+  def reverse[A](as: List[A]): List[A] =
+    foldLeft(as, List[A]()) { (l, x) => Cons(x, l) }
 }

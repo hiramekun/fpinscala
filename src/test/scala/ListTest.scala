@@ -8,6 +8,9 @@ class ListTest extends AnyFlatSpec with should.Matchers {
     sum(List(1, 2, 3)) should be(6)
     sum(List(1)) should be(1)
     sum(List()) should be(0)
+    sumL(List(1, 2, 3)) should be(6)
+    sumL(List(1)) should be(1)
+    sumL(List()) should be(0)
   }
 
   "setHead" should "最初の要素を置き換える" in {
@@ -26,5 +29,17 @@ class ListTest extends AnyFlatSpec with should.Matchers {
 
   "init" should "末尾の要素を除く全ての要素で構成したリストを返す" in {
     init(List(1, 2, 3)) should be(List(1, 2))
+  }
+
+  "length" should "リストの長さを返す" in {
+    List.length(List(1, 2)) should be(2)
+    List.length(List()) should be(0)
+    List.lengthL(List(1, 2)) should be(2)
+    List.lengthL(List()) should be(0)
+  }
+
+  "reverse" should "リストを反転させる" in {
+    reverse(List(1, 2)) should be(List(2, 1))
+    reverse(List()) should be(List())
   }
 }
