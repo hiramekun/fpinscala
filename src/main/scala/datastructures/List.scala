@@ -69,4 +69,7 @@ object List {
 
   def reverse[A](as: List[A]): List[A] =
     foldLeft(as, List[A]()) { (l, x) => Cons(x, l) }
+
+  def append[A](l: List[A], r: List[A]): List[A] =
+    foldRight(l, r)(Cons(_, _))
 }
